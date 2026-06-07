@@ -1,0 +1,259 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import skyerbred from "../img/sky_clouds.webp";
+import surfer from "../img/surfer_girl.webp";
+import Icons from "../components/Icons.astro";
+import HeroVideo from "../components/Hero_video.astro";
+import DonationTaeller from "../components/Donation_taeller.astro";
+import Buttons from "../components/Buttons_nav.astro";
+import "../css/custom.css";
+
+import Banner from "../components/Card_step.astro";
+import OverskriftHeroIndex from "../components/Overskrift_hero_index.astro";
+---
+
+<Layout>
+  <section class="hero">
+    <HeroVideo />
+    <div class="taeller">
+      <DonationTaeller />
+    </div>
+    <div class="overskrift">
+      <OverskriftHeroIndex />
+    </div>
+    <!-- 3 KNAPPER -->
+    <!--   <ButtonsNav /> -->
+    <div class="buttons">
+      <Buttons />
+    </div>
+  </section>
+  <div class="icons">
+    <Icons />
+  </div>
+  <div class="koncept_1_1">
+    <div class="koncept_tekst">
+      <h1>Vi donerer til Den Danske Naturfond</h1>
+      <p>
+        Vores koncept er helt enkelt: Brug dit Dankort, når du betaler, og vi
+        donerer 1 øre pr. transaktion til den Danske Naturfond.
+      </p>
+      <p>
+        Hertil donere både vores samarbejdspartnere i form af udvalgte danske
+        butikker og banker også 1 øre pr. Transaktion.
+      </p>
+      <p>
+        Dvs. Der kan blive doneret op til 3 øre for din transaktion, hver gang,
+        du handler med Dankort!
+      </p>
+      <div class="koncept_button">
+        <a href="/detail">Se støttede områder her</a>
+      </div>
+    </div>
+    <div class="koncept_billeder">
+      <img
+        src={skyerbred.src}
+        alt=""
+        class="kant_billede"
+        id="kant_landscape"
+      />
+      <img src={surfer.src} alt="" class="kant_billede" id="kant_portrait" />
+    </div>
+  </div>
+  <Banner />
+</Layout>
+
+<style>
+  @font-face {
+    font-family: raleway;
+    src: url(/fonts/Raleway-VariableFont_wght.ttf);
+  }
+
+  body {
+    text-align: center;
+  }
+h1 {
+    margin-bottom: 1rem;
+  }
+  img {
+    border-radius: 25px;
+  }
+  .icons {
+    position: relative;
+  }
+  .koncept_1_1 {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .koncept_tekst {
+    grid-column: 1;
+    text-align: left;
+    padding: 1.5rem 1rem 1.5rem 1.5rem;
+    font-family: raleway;
+  }
+
+  .koncept_billeder {
+    grid-column: 2;
+    position: relative;
+    width: 120px;
+    height: 230px;
+    overflow: hidden;
+  }
+  .koncept_button:hover {
+    filter: grayscale(30%);
+  }
+
+  .koncept_tekst h1 {
+    font-size: var(--h1-mobile);
+    color: var(--black);
+    font-family: raleway;
+    font-weight: var(--title-weight);
+  }
+  .koncept_tekst p {
+    font-size: var(--p-mobile);
+    color: var(--black);
+  }
+
+  .koncept_button a {
+    text-decoration: none;
+    color: var(--white);
+    font-size: var(--button-mobile);
+    font-weight: var(--title-weight);
+  }
+  .kant_billede {
+    position: absolute;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+  }
+
+  #kant_landscape {
+    width: 200px;
+    height: auto;
+    top: 10px;
+    left: 0;
+    z-index: 1;
+  }
+
+  #kant_portrait {
+    width: 105px;
+    height: 145px;
+    top: 70px;
+    left: 40px;
+    z-index: 2;
+  }
+
+  .koncept_button {
+    text-align: center;
+    margin-top: 1rem;
+    width: fit-content;
+    padding: var(--btn_padding-mobile);
+    background-color: var(--red);
+    border-radius: 25px;
+    height: fit-content;
+  }
+  /* HERO */
+
+  .hero {
+    position: relative;
+    height: max-content;
+  }
+  .hero_video {
+    display: block;
+    width: 100%;
+  }
+  .taeller {
+    position: absolute;
+
+    top: 1rem;
+    right: 16px;
+
+    z-index: 10;
+  }
+  .overskrift {
+    position: absolute;
+    bottom: 100px;
+    left: 26px;
+    z-index: 10;
+    text-align: left;
+    height: max-content;
+  }
+  .buttons {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 25px;
+  }
+  @media (min-width: 1024px) {
+    /* HERO */
+    .hero {
+      height: auto;
+    }
+    .taeller {
+      right: 85px;
+      top: 35px;
+    }
+    .overskrift {
+      position: absolute;
+      top: 35px;
+      left: 85px;
+      z-index: 9999;
+      text-align: left;
+    }
+    .buttons {
+      position: relative;
+      z-index: 999;
+      bottom: 119px;
+    }
+    .koncept_tekst h1 {
+      font-size: var(--h1);
+    }
+    .koncept_tekst p {
+      font-size: var(--p);
+    }
+
+    .koncept_1_1 {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem;
+    }
+
+    .koncept_tekst {
+      padding: 2rem 1rem 2rem 3rem;
+    }
+
+    .koncept_billeder {
+      width: 340px;
+      height: 240px;
+      overflow: visible;
+      justify-self: right;
+      padding: 0 0 0 1rem;
+      margin: 6.5rem;
+    }
+
+    #kant_landscape {
+      width: 27rem;
+      height: auto;
+      top: -50px;
+      right: 0;
+      left: auto;
+    }
+
+    #kant_portrait {
+      width: 15rem;
+      height: auto;
+      top: 60px;
+      right: -60px;
+      left: auto;
+    }
+    .koncept_button a {
+      font-size: var(--button);
+    }
+    .koncept_button {
+      padding: var(--btn_padding);
+    }
+  }
+</style>

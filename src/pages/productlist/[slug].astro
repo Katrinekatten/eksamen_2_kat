@@ -1,0 +1,173 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import "../../css/custom.css";
+import Buttons from "../../components/Buttons_nav.astro";
+import Banner from "../../components/Banner_read_more.astro";
+import { supabase } from "../../lib/supabase.js";
+
+// Hent slug fra URL
+const { slug } = Astro.params;
+
+// Hent det specifikke naturområde fra Supabase
+const { data: sted } = await supabase
+  .from("naturomraader")
+  .select("*")
+  .eq("slug", slug)
+  .single();
+
+// Hvis området ikke findes, send til 404
+if (!sted) {
+  return Astro.redirect("/404");
+}
+
+// Generer alle mulige slugs til Astro's statiske routing
+export async function getStaticPaths() {
+  const { createClient } = await import("@supabase/supabase-js");
+  const supabase = createClient(
+    import.meta.env.PUBLIC_SUPABASE_URL,
+    import.meta.env.PUBLIC_SUPABASE_KEY,
+  );
+  const { data } = await supabase.from("naturomraader").select("slug");
+  return data.map((sted) => ({
+    params: { slug: sted.slug },
+  }));
+}
+---
+
+<Layout>
+  <main>
+    <!-- MOBIL BILLEDE 1 -->
+    <img src={sted.billede_url} alt={sted.navn} class="img_mobile-1" />
+
+    <Buttons />
+
+    <!-- OVERSKRIFT -->
+    <h1>{sted.navn}</h1>
+
+    <!-- DESKTOP SEKTION: collage + tekst -->
+    <section class="desktop-section">
+      <div class="collage-wrapper">
+        <img src={sted.billede_url} alt={sted.navn} class="detail-img1" />
+        <img src={sted.billede_url_2} alt={sted.navn} class="detail-img2" />
+      </div>
+
+      <div class="nature-text">
+        <h2>{sted.undertitel}</h2>
+        <p>{sted.beskrivelse}</p>
+      </div>
+    </section>
+
+    <!-- MOBIL BILLEDE 2 -->
+    <img src={sted.billede_url_2} alt={sted.navn} class="img_mobile-2" />
+
+    <Banner />
+  </main>
+</Layout>
+
+<style>
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .nature-text,
+  h1 {
+    display: block;
+    margin: 0 auto;
+    padding: 25px;
+  }
+
+  h1 {
+    font-size: var(--h1-mobile);
+    font-weight: var(--bold);
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: var(--h2-mobile);
+    font-weight: var(--semibold);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: var(--p-mobile);
+    font-weight: var(--regular);
+
+  }
+
+  .collage-wrapper {
+    display: none;
+  }
+
+  .img_mobile-1,
+  .img_mobile-2 {
+    display: block;
+    margin: 0 auto;
+    min-width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    main {
+      max-width: 1200px;
+    }
+
+    h1 {
+      font-size: var(--h1);
+      margin: 0 auto;;
+    }
+
+    h2 {
+      font-size: var(--h2);
+    }
+
+    p {
+      font-size: var(--p);
+    }
+
+    .desktop-section {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 0 auto;
+      gap: 100px;
+    }
+
+    .nature-text,
+    h1 {
+      max-width: 350px;
+    }
+
+    .img_mobile-1,
+    .img_mobile-2 {
+      display: none;
+    }
+
+    .collage-wrapper {
+      display: block;
+      position: relative;
+      width: 450px;
+      height: 500px;
+    }
+
+    .collage-wrapper img {
+      position: absolute;
+      width: 100%;
+      height: auto;
+      border-radius: 25px;
+      object-fit: cover;
+    }
+
+    .detail-img1 {
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .detail-img2 {
+      top: 120px;
+      left: 80px;
+      z-index: 2;
+    }
+  }
+</style>

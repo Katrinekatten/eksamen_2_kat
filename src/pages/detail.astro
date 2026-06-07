@@ -1,0 +1,456 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Buttons from "../components/Buttons_nav.astro";
+import { supabase } from "../lib/supabase.js";
+import "../css/custom.css";
+import "../css/reset.css";
+import kort from "../assets/kort.svg";
+
+const { data: naturomraader, error } = await supabase
+  .from("naturomraader")
+  .select("*");
+
+console.log("Data:", naturomraader);
+console.log("Error:", error);
+---
+
+<Layout>
+  <main>
+
+    <!-- HERO BILLEDER OG TEKST, DESKTOP-->
+<section class="hero-box">
+
+    <div class="hero-photos">
+      <img src="/src/img/sandy_beach.webp" alt="" class="hero-img layer layer1" />
+      <img src="/src/img/sandy_beach_coastline.webp" alt="" class="hero-desktop layer layer2" />
+      <img src="/src/img/grassy_beach_sunset.webp" alt="" class="hero-desktop layer layer3" />
+    </div>
+
+ <div class="nature-text-desktop">
+      <h1>Vi giver plads til den Danske Natur</h1>
+      <p>
+        Hver gang du bruger dit Dankort, donerer vi 1 øre til Den Danske
+        Naturfond. Det bliver til mere end 10 millioner kroner hvert år, der går
+        ubeskåret til opkøb og udvikling af mere vild og varig natur i Danmark.
+        Vi kalder det Dankort Øremærket. Målet er ikke at forbruge mere, men at
+        skabe mere plads til den danske natur.
+      </p>
+  </div>
+
+</section> 
+<div class="buttons">
+<Buttons />
+</div>
+
+
+       <!-- HERO BILLEDE OG TEKST, DESKTOP-->
+
+    <div class="nature-text-mobile">
+      <h1>Vi giver plads til den Danske Natur - MOBIL VISNING</h1>
+      <p>
+        Hver gang du bruger dit Dankort, donerer vi 1 øre til Den Danske
+        Naturfond. Det bliver til mere end 10 millioner kroner hvert år, der går
+        ubeskåret til opkøb og udvikling af mere vild og varig natur i Danmark.
+        Vi kalder det Dankort Øremærket. Målet er ikke at forbruge mere, men at
+        skabe mere plads til den danske natur.
+      </p>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- KORT OVERSKRIFT -->
+    <h2>Her donerer vi til den danske natur</h2>
+
+    <!-- KORT + CARD WRAPPER -->
+    <div class="map-card-wrapper">
+
+      <!-- DANMARKSKORT -->
+      <div class="map-container">
+        <img src={kort.src} alt="Danmarkskort" class="denmark-map" />
+
+        <!-- PINS fra Supabase -->
+        {naturomraader && naturomraader.map((sted) => (
+          <button
+            class="pin"
+            style={`left: ${sted.pin_x}%; top: ${sted.pin_y}%;`}
+            data-slug={sted.slug}
+            data-navn={sted.navn}
+            data-undertitel={sted.undertitel}
+            data-billede1={sted.billede_url}
+            data-billede2={sted.billede_url_2}
+            aria-label={sted.navn}
+          />
+        ))}
+      </div>
+
+      <!-- CARD VED SIDEN AF KORTET -->
+      <div class="map-card" id="map-card">
+
+        <!-- STANDARD CARD (vises først) -->
+        <div class="card-default" id="card-default">
+          <p>Klik på de røde prikker for at læse om de områder som Dankort donerer til</p>
+        </div>
+
+        <!-- DYNAMISK CARD (skifter når man klikker en pin) -->
+        <div class="card-detail" id="card-detail" style="display: none;">
+          <h3 id="card-navn"></h3>
+          <p id="card-undertitel" class="card-undertitel"></p>
+          <img id="card-billede1" src="" alt="" />
+          <img id="card-billede2" src="" alt="" />
+          <a id="card-laes-mere" href="">
+            <button>Læs mere →</button>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</Layout>
+
+<script>
+  const pins = document.querySelectorAll(".pin");
+  const cardDefault = document.getElementById("card-default");
+  const cardDetail = document.getElementById("card-detail");
+  const cardNavn = document.getElementById("card-navn");
+  const cardUndertitel = document.getElementById("card-undertitel");
+  const cardBillede1 = document.getElementById("card-billede1") as HTMLImageElement;
+  const cardBillede2 = document.getElementById("card-billede2") as HTMLImageElement;
+  const cardLaesMere = document.getElementById("card-laes-mere") as HTMLAnchorElement;
+
+  pins.forEach((pin) => {
+    pin.addEventListener("click", () => {
+      const el = pin as HTMLElement;
+      const navn = el.dataset.navn;
+      const undertitel = el.dataset.undertitel;
+      const billede1 = el.dataset.billede1;
+      const billede2 = el.dataset.billede2;
+      const slug = el.dataset.slug;
+
+      if (cardNavn) cardNavn.textContent = navn ?? "";
+      if (cardUndertitel) cardUndertitel.textContent = undertitel ?? "";
+      if (cardBillede1) { cardBillede1.src = billede1 ?? ""; cardBillede1.alt = navn ?? ""; }
+      if (cardBillede2) { cardBillede2.src = billede2 ?? ""; cardBillede2.alt = navn ?? ""; }
+      if (cardLaesMere) cardLaesMere.href = `/productlist/${slug}`;
+
+      if (cardDefault) cardDefault.style.display = "none";
+      if (cardDetail) cardDetail.style.display = "flex";
+    });
+  });
+</script>
+
+
+<style>
+  /* MOBILE FIRST */
+
+  main {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+
+  .hero-desktop, 
+  .nature-text-desktop {
+    display: none;
+  }
+
+  .hero-img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .nature-text-mobile {
+    padding: 30px;
+  }
+  
+
+
+  h1 {
+    font-size: var(--h1-mobile);
+    font-weight: var(--bold);
+  }
+
+  h2 {
+    font-size: var(--h2-mobile);
+    font-weight: var(--semibold);
+    text-align: center;
+    color: var(--red);
+    padding: 0 1rem;
+  }
+
+  p {
+    font-size: var(--p-mobile);
+    font-weight: var(--regular);
+    margin-top: 1rem;
+  }
+
+
+
+
+  /* KORT + CARD WRAPPER */
+  .map-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  /* KORTET — lidt mindre */
+  .map-container {
+    position: relative;
+    width: 85%;
+    margin: 0 auto;
+  }
+
+  .denmark-map {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  /* PINS */
+  .pin {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  padding: 0;
+}
+
+  .pin:hover {
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+
+  /* CARD */
+  .map-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+  }
+
+  .card-default {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .card-detail {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .card-detail h3 {
+    font-size: var(--h2-mobile);
+    margin: 0;
+  }
+
+  /* UNDERTITEL */
+  .card-undertitel {
+    font-size: var(--p-mobile);
+    color: var(--dark-grey);
+    margin: 0;
+    font-style: italic;
+  }
+
+  .card-detail img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .card-detail a {
+    text-decoration: none;
+  }
+
+  .card-detail button {
+    font-size: var(--button-mobile);
+    background-color: var(--red);
+    color: white;
+    border: none;
+    border-radius: var(--btn_border-mobile);
+    padding: var(--btn_padding-mobile);
+    cursor: pointer;
+    width: 100%;
+    margin: 0;
+  }
+/* BUTTONS */
+.buttons{
+  display: flex;
+ align-items: center;
+ justify-content: center;
+  margin-top: 2rem;
+  width: 100%;
+}
+  /* DESKTOP */
+
+  @media (min-width: 1024px) {
+    main {
+      max-width: 1200px;
+    }
+
+
+.hero-desktop, 
+.nature-text-desktop {
+    display: block;
+  }
+
+  .nature-text-mobile {
+  display: none;
+}
+
+  .nature-text-desktop {
+      max-width: 50%;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+  h1 {
+      font-size: var(--h1);
+    }
+
+  h2 {
+      font-size: var(--h2);
+      margin-bottom: 1.5rem;
+    }
+
+  p {
+      font-size: var(--p);
+    }
+
+
+
+  /* HERO-BILLEDER I LAG */
+
+
+
+.layer3 {
+  height: 450px;
+  width: auto;
+}
+
+
+  .hero-box  {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between; 
+}
+
+.hero-photos {
+  position: relative;  
+  height: 450px;
+  width: 50%;
+  
+}
+
+.hero-photos img { 
+  position: absolute;
+/*   width: 50%; */
+
+  height: auto;
+  object-fit: cover;
+ 
+}
+
+  /* LAG 1 – Sandy Beach */
+    .layer1 {
+    top: 60px;
+    left: 0%;
+    z-index: 1;
+    width: 75%;
+  }
+
+  /* LAG 2 – Coastline */
+  .layer2 {
+    top: 250px;
+    left: 7%;
+    z-index: 3;
+    width: 60%;
+  }
+
+  /* LAG 3 – Lodret water */
+  .layer3 {
+    top: 110px;
+    left: 50%;
+    z-index: 2;
+    width: 50%;
+  }
+
+
+
+
+
+
+    /* DANMARKSKORTET */
+    .map-card-wrapper {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 0 2rem 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+
+    /* KORTET — lidt mindre på desktop */
+    .map-container {
+      width: 45%;
+      flex-shrink: 0;
+      margin: 0;
+    }
+
+    .map-card {
+      width: 45%;
+      min-height: 400px;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .card-undertitel {
+      font-size: var(--p);
+    }
+
+    .card-detail h3 {
+      font-size: var(--h2);
+    }
+
+    .card-detail img {
+      height: 160px;
+    }
+
+    .card-detail button {
+      font-size: var(--button);
+      border-radius: var(--btn_border);
+      padding: var(--btn_padding-mobile);
+    }
+
+    .pin {
+      width: 18px;
+      height: 18px;
+    }
+  
+.buttons{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  position: relative;
+}
+}
+
+</style>

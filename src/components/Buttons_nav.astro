@@ -1,0 +1,115 @@
+---
+import "../css/custom.css";
+/* import "../css/reset.css"; */
+
+const currentPath = Astro.url.pathname;
+---
+
+<div class="nav_btns">
+  <a href="/" class={`nav-link ${currentPath === "/" ? "active" : ""}`}
+    >Vores koncept</a
+  >
+  <a
+    href="/detail"
+    class={`nav-link ${currentPath === "/detail" ? "active" : ""}`}
+    >Udforsk områderne</a
+  >
+  <a
+    href="/stepbystep"
+    class={`nav-link ${currentPath === "/stepbystep" ? "active" : ""}`}
+    >Dankort i 3 trin</a
+  >
+</div>
+
+<style>
+  /* MOBILE FIRST */
+
+  .nav_btns {
+    display: flex;
+    justify-content: center;
+    gap: 1px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    white-space: normal;
+  }
+
+  .nav-link {
+    background-color: var(--buttons-grey);
+    color: var(--white);
+    font-weight: var(--title-weight);
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+
+    font-size: var(--button-mobile);
+    transition: 0.3s ease;
+    padding: var(--btn_padding-mobile);
+    border-radius: 25px;
+    margin: 10px;
+    /* box-shadow:
+      inset -1px 2px 5px var(--lightest-grey),
+      inset -1px 2px 2px var(--grey); */
+  }
+  /* FUNKTION */
+  .nav_btns.fixed {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    white-space: nowrap;
+  }
+
+  /* Active state – skal sættes på den side, man er på */
+  .nav-link.active {
+    background: #4a4a4a;
+    color: white;
+  }
+
+  /* DESKTOP 1024PX */
+
+  @media (min-width: 1024px) {
+    .nav_btns {
+      gap: 50px;
+      margin: 2rem 0;
+    }
+
+    .nav-link {
+      font-size: var(--button);
+      padding: var(--btn_padding);
+      border-radius: 25px;
+      margin: 10px;
+    }
+
+    .nav-link:hover {
+      background: var(--buttons-hover);
+      cursor: pointer;
+      color: var(--white);
+    }
+
+    .nav-link.active {
+      background: #4a4a4a;
+      color: white;
+    }
+  }
+</style>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    if (window.innerWidth < 1024) return;
+
+    const nav = document.querySelector(".nav_btns");
+
+    if (!nav) return;
+
+    const triggerTop = nav.getBoundingClientRect().top + window.scrollY;
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY >= triggerTop) {
+        nav.classList.add("fixed");
+      } else {
+        nav.classList.remove("fixed");
+      }
+    });
+  });
+</script>

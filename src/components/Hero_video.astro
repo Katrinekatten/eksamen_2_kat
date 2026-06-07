@@ -1,0 +1,36 @@
+---
+import "../css/custom.css";
+import "../css/reset.css";
+---
+
+<section id="hero_index">
+  <video id="hero_video" autoplay loop muted playsinline>
+    <source src="/video/hero_index.mp4" type="video/mp4" />
+  </video>
+</section>
+
+<style>
+  #hero_index {
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 17px;
+    overflow: hidden;
+    border-radius: 25px;
+    height: 252px;
+  }
+
+  #hero_video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  @media (min-width: 1024px) {
+    #hero_index {
+      margin-right: 50px;
+      margin-left: 50px;
+      height: 670px;
+      margin-top: 48px;
+    }
+  }
+</style>

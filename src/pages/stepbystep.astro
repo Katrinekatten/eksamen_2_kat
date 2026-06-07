@@ -1,0 +1,316 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Buttons from "../components/Buttons_nav.astro";
+import "../css/custom.css";
+import "../css/reset.css";
+import Jumpdown from "../assets/jumpdown.svg";
+import Piggyback from "../img/girls_piggybacking.webp";
+import Smallshop from "../img/small_shop.webp";
+import Mobilsti from "../assets/sti_mobil.svg";
+import DankortIHand from "../img/dankort_i_haand.svg";
+import LogPaa from "../img/logon.svg";
+import Udfyld from "../img/udfyld_detaljer.svg";
+---
+
+<Layout>
+  <div class="step_2_1">
+    <div class="step_tekst">
+      <h1>Det er nemt at få et Dankort</h1>
+      <p>
+        Følg vores nemme step by step guide, så du hurtigt kan komme i gang med
+        at støtte både natur og lokal butikker.
+      </p>
+      <img
+        src={Jumpdown.src}
+        alt=""
+        class="jump_down_button"
+        id="jump_down_button"
+      />
+    </div>
+    <div class="step_billeder">
+      <img src={Smallshop.src} alt="" class="step_pic" id="desktop_billed" />
+      <img src={Piggyback.src} alt="" class="step_pic" id="mobil_billed" />
+    </div>
+  </div>
+  <div class="buttons">
+    <Buttons />
+  </div>
+  <img src={Mobilsti.src} alt="" class="mobil_sti" />
+  <div class="step_by_step_title" id="steps">
+    <h1>3 nemme steps til Dankort</h1>
+  </div>
+  <div class="step_by_step">
+    <div class="step-wrapper">
+      <div class="step_venstre" id="step_1">
+        <div class="step_v_pic">
+          <img src={LogPaa.src} alt="" id="steps_imgs_border" />
+        </div>
+        <div class="step_v_tekst">
+          <h2>STEP 1</h2>
+          <p>
+            Log ind på din netbank og find frem til deres kortbestillings
+            service.
+          </p>
+        </div>
+      </div>
+      <div class="step_hoejre">
+        <div class="step_h_pic" id="step_2">
+          <img src={Udfyld.src} alt="" id="steps_imgs_border" />
+        </div>
+        <div class="step_h_tekst">
+          <h2>STEP 2</h2>
+          <p>
+            Vælg Dankort eller Visa Dankort og udfyld de påkrævede
+            informationer.
+          </p>
+        </div>
+      </div>
+      <div class="step_venstre" id="step_3">
+        <div class="step_v_pic">
+          <img src={DankortIHand.src} alt="" id="steps_imgs_border" />
+        </div>
+        <div class="step_v_tekst">
+          <h2>STEP 3</h2>
+          <p>Vent på at kortet leveres i din postkasse. Så nemt er det!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const scrollToSteps = document.getElementById("jump_down_button");
+  const stepsSection = document.getElementById("steps");
+
+  if (scrollToSteps && stepsSection) {
+    scrollToSteps.onclick = () => {
+      stepsSection.scrollIntoView({
+        behavior: "smooth",
+      });
+    };
+  }
+</script>
+
+<style>
+  #steps_imgs_border {
+    border-style: solid;
+    border-width: 3px;
+    border-color: var(--light-grey);
+  }
+  .step_2_1 {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 1rem;
+  }
+  img {
+    border-radius: 25px;
+  }
+  #desktop_billed {
+    display: none;
+  }
+  #mobil_billed {
+    height: 15rem;
+    width: auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .step_tekst {
+    grid-column: 1;
+    padding: 1.5rem 1rem 1.5rem 1.5rem;
+  }
+  h1 {
+    font-size: var(--h1-mobile);
+  }
+  p {
+    font-size: var(--p-mobile);
+    margin-top: 1rem;
+  }
+  h2 {
+    font-size: var(--h2-mobile);
+  }
+  .step_billeder {
+    position: relative;
+    width: 120px;
+    height: auto;
+    overflow: hidden;
+  }
+  .jump_down_button:hover {
+    cursor: pointer;
+    filter: grayscale(30%);
+  }
+  .jump_down_button {
+    width: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  /*step-by-step*/
+  .step_by_step {
+    height: fit-content;
+
+    overflow: hidden;
+    background-image: url(../assets/mobil_step_baggrund.svg);
+  }
+  .step-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10rem 0;
+  }
+  .step_venstre {
+    display: flex;
+    flex-direction: row;
+    /* transform: translateX(-4rem); */
+  }
+  .step_hoejre {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    /* transform: translateX(4rem); */
+  }
+  .step_v_pic img,
+  .step_h_pic img {
+    width: 10rem;
+    position: relative;
+    height: auto;
+  }
+  .step_v_tekst,
+  .step_h_tekst {
+    background-color: var(--light-blue);
+    border-radius: 25px;
+    width: 8rem;
+    padding: 1rem;
+    height: auto;
+  }
+  .step_h_tekst {
+  }
+  .step_h_pic {
+    order: 2;
+  }
+  .mobil_sti {
+    border-radius: 0px;
+    position: absolute;
+    height: 48rem;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 70vh;
+    z-index: -1;
+  }
+  .step_by_step_title {
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .mobil_sti {
+      top: 70vh;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .step_2_1 {
+      max-width: 1200px;
+      padding: 5rem 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin: 0 auto;
+    }
+
+    #desktop_billed {
+      display: block;
+      height: 20rem;
+    }
+    #mobil_billed {
+      height: 20rem;
+    }
+    .step_billeder {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: auto;
+    }
+    h1 {
+      font-size: var(--h1);
+    }
+    h2 {
+      font-size: var(--h2);
+    }
+    p {
+      font-size: var(--p);
+    }
+    /*step-by-step desktop*/
+    .step_by_step {
+      display: flex;
+      justify-content: center;
+
+      padding: 0 5rem;
+      margin: 0 auto;
+      background-repeat: repeat;
+    }
+    .step-wrapper {
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem 0;
+    }
+    .step_v_pic img,
+    .step_h_pic img {
+      width: 15rem;
+      position: relative;
+      height: auto;
+    }
+    .step_v_tekst,
+    .step_h_tekst {
+      width: 15rem;
+      padding: 1rem;
+      height: auto;
+    }
+    .step_venstre {
+      transform: translateX(0rem);
+    }
+    .step_hoejre {
+      justify-content: flex-end;
+      transform: translateX(0rem);
+    }
+
+    .jump_down_button {
+      width: 3rem;
+    }
+    .mobil_sti {
+      height: 75rem;
+      top: 80vh;
+    }
+  }
+  @media (min-width: 1400px) {
+    .mobil_sti {
+      height: 80rem;
+      top: 65vh;
+    }
+  }
+  @media (min-width: 2500px) {
+    .mobil_sti {
+      height: 75rem;
+      top: 38vh;
+    }
+  }
+  /* FUNKTIONER */
+  .buttons.fixed {
+    position: fixed;
+    top: 0;
+    left: 295px;
+    z-index: 1000;
+  }
+</style>
+
+<script>
+  const buttons = document.querySelector(".buttons") as HTMLElement;
+
+  const startPosition = buttons.offsetTop;
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > startPosition) {
+      buttons.classList.add("fixed");
+    } else {
+      buttons.classList.remove("fixed");
+    }
+  });
+</script>

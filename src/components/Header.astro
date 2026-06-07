@@ -1,0 +1,197 @@
+---
+import "../css/custom.css";
+import "../css/reset.css";
+---
+
+<header>
+  <div class="dk-header">
+    <a href="/"
+      ><div class="logo">
+        <img src="/DK_Logo_CMYK.svg" alt="Dankort" />
+        <h2>ØREMÆRKET</h2>
+      </div></a
+    >
+
+    <button class="burger" id="burger" aria-label="Åbn menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="menu" id="menu">
+      <ul>
+        <li><a href="/">Erhverv</a></li>
+        <li><a href="/">Privat</a></li>
+        <li><a href="/">Dankort Øremærket</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const burger = document.querySelector(".burger");
+  const menu = document.querySelector(".menu");
+
+  if (burger && menu) {
+    burger.addEventListener("click", () => {
+      burger.classList.toggle("active");
+      menu.classList.toggle("active");
+    });
+  }
+</script>
+
+<style>
+  @font-face {
+    font-family: raleway;
+    src: url(/fonts/Raleway-VariableFont_wght.ttf);
+  }
+  header {
+    top: 0;
+    background-color: var(--header-grey);
+    z-index: 10;
+  }
+
+  .dk-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+  .dk-header a {
+    text-decoration: none;
+  }
+
+  .logo img {
+    width: auto;
+    height: 2rem;
+    align-self: center;
+  }
+  .logo {
+    padding: 0 0 0 1.5rem;
+    height: 41px;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  .logo h2 {
+    color: var(--black);
+    align-self: center;
+    font-weight: 600;
+    font-size: var(--p-mobile);
+  }
+
+  .burger {
+    padding: 0 2rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    height: 16px;
+  }
+
+  .burger span {
+    width: 14px;
+    height: 1px;
+    background-color: var(--black);
+    transition: 0.3s;
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 64px);
+    background-color: var(--header-grey);
+    backdrop-filter: blur(10px);
+    z-index: 9;
+    padding-top: 1rem;
+  }
+
+  .menu.active {
+    display: block;
+  }
+
+  .menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: var(--title-weight);
+    font-size: var(--button);
+    font-family: raleway;
+    display: block;
+    text-align: right;
+  }
+
+  .burger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(3px, 4px);
+  }
+
+  .burger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .burger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+  }
+  @media (min-width: 800px) {
+    header {
+      padding: 0 1rem;
+    }
+    .dk-header {
+      height: 80px;
+      padding: 0;
+      box-sizing: border-box;
+      margin: 0 3rem;
+    }
+
+    .logo {
+      padding: 0 1.5rem 0 0;
+      gap: 1rem;
+    }
+    .logo img {
+      width: auto;
+      height: 3rem;
+      align-self: center;
+    }
+    .logo h2 {
+      font-size: var(--p);
+    }
+
+    .burger {
+      display: none;
+    }
+
+    .menu {
+      display: block;
+      position: static;
+      width: auto;
+      height: auto;
+      padding-top: 0;
+      background: transparent;
+      backdrop-filter: none;
+    }
+
+    .menu ul {
+      flex-direction: row;
+    }
+
+    .menu a {
+      text-align: left;
+      font-size: var(--h1-mobile);
+    }
+  }
+</style>

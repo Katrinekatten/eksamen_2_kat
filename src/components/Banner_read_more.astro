@@ -1,0 +1,119 @@
+---
+import "../css/custom.css";
+import "../css/reset.css";
+---
+
+<div class="banner_readmore">
+  <div class="tekst_box_left">
+    <h2>Læs mere om samarbejdet her</h2>
+    <p>
+      Dankort Øremærket blev lanceret i 2021 som en ordning, hvor der automatisk
+      doneres 1 øre til Den Danske Naturfond, hver gang du betaler med dit
+      Dankort. Initiativet blev skabt for at støtte vild, dansk natur og sikre
+      store, beskyttede naturområder i Danmark...
+    </p>
+    <a href="https://naturfonden.dk/dankort/">Tag mig til Naturfonden</a>
+  </div>
+
+  <img src="/src/img/loevfro_naturfond.webp" alt="" />
+</div>
+
+<style>
+  /* MOBILE FIRST */
+
+  h2 {
+    font-size: var(--h2-mobile);
+  }
+
+  p {
+    font-size: var(--p-mobile);
+  }
+
+  .banner_readmore {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    gap: 20px;
+
+    padding: 10px;
+    margin: 0 auto;
+  }
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 150px;
+
+    text-decoration: none;
+    font-size: var(--button-mobile);
+
+    color: var(--white);
+    background-color: var(--red);
+
+    padding: var(--btn_padding-mobile);
+    border-radius: var(--btn_border-mobile);
+    margin: 0 auto;
+  }
+
+  img {
+    width: 100%;
+    height: 200px;
+    max-width: 250px;
+
+    object-fit: cover;
+    border-radius: var(--img_border-mobile);
+  }
+
+  .tekst_box_left {
+    max-width: 250px;
+  }
+
+  /* DESKTOP */
+
+  @media (min-width: 1024px) {
+    h2 {
+      font-size: var(--h2);
+    }
+
+    p {
+      font-size: var(--p);
+    }
+
+    a {
+      font-size: var(--button);
+
+      border-radius: var(--btn_border);
+      max-width: 250px;
+
+      /*       margin: var(--btn_margin); */
+    }
+
+    a:hover {
+      opacity: 0.8;
+      cursor: pointer;
+      transition: 0.2 ease;
+    }
+    .banner_readmore {
+      flex-direction: row;
+      justify-content: space-between;
+
+      gap: 70px;
+    }
+
+    .tekst_box_left {
+      max-width: 660px;
+    }
+
+    img {
+      height: 280px;
+      width: auto;
+      min-width: 300px;
+
+      object-fit: cover;
+      border-radius: var(--img_border-mobile);
+    }
+  }
+</style>

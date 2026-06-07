@@ -1,0 +1,204 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import "../css/custom.css";
+import "../css/reset.css";
+
+import Buttons from "../components/Buttons_nav.astro";
+import Banner from "../components/Banner_read_more.astro";
+---
+
+<Layout>
+  <main>
+    <!--   Div til at indsætte billede-link fra Superbase af område. Billede 1 af 2 -->
+    <div>
+      <img src="/src/img/sandy_beach.webp" alt="" class="img_mobile-1" />
+    </div>
+
+    <div class="buttons">
+      <Buttons />
+    </div>
+    <!--  Julie indsætter Superbase elementer -->
+
+    <h1>Naturområde overskrift - Superbase</h1>
+
+    <section class="desktop-section">
+      <!--  Collage af 2 billeder, der kun vises i desktop, indsæt img link 1 og 2-->
+      <div class="collage-wrapper">
+        <img
+          src="/src/img/sandy_beach_coastline.webp"
+          alt=""
+          class="detail-img1"
+        />
+        <img src="/src/img/sandy_beach.webp" alt="" class="detail-img2" />
+      </div>
+
+      <div class="nature-text">
+        <h2>Underoverskrift - Supabase</h2>
+        <p>
+          Tekst hentes gennem API om specifikt område. Lorem ipsum dolor sit
+          amet consectetur adipisicing elit. Consequuntur, deserunt placeat
+          neque esse excepturi aliquid eveniet tempora temporibus quis
+          reiciendis sunt nam. Totam excepturi sequi ullam distinctio
+          necessitatibus dignissimos delectus.
+        </p>
+      </div>
+    </section>
+
+    <!--   Div til at indsætte billede-link fra Superbase af område. Billede 2 af 2 -->
+    <img
+      src="/src/img/sandy_beach_coastline.webp"
+      alt=""
+      class="img_mobile-2"
+    />
+
+    <Banner />
+  </main>
+</Layout>
+
+<style>
+  /* MOBILE FIRST */
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .nature-text,
+  h1 {
+    display: block;
+    /* 
+   max-width: 350px; */
+    margin: 0 auto;
+    padding: 25px;
+  }
+
+  h1 {
+    font-size: var(--h1-mobile);
+    font-weight: var(--bold);
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: var(--h2-mobile);
+    font-weight: var(--semibold);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: var(--p-mobile);
+    font-weight: var(--regular);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .collage-wrapper {
+    display: none;
+  }
+
+  .img_mobile-1,
+  .img_mobile-2 {
+    display: block;
+
+    margin: 0 auto;
+
+    min-width: 100%;
+  }
+
+  /* BUTTONS */
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    width: 100%;
+  }
+
+  body {
+    min-height: 200vh;
+  }
+
+  /* DESKTOP 1024PX*/
+
+  @media (min-width: 1024px) {
+    main {
+      max-width: 1200px;
+    }
+
+    h1 {
+      font-size: var(--h1);
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: var(--h2);
+    }
+
+    p {
+      font-size: var(--p);
+    }
+
+    .desktop-section {
+      display: flex;
+      flex-direction: row;
+
+      justify-content: space-between;
+      margin: 0 auto;
+      gap: 100px;
+    }
+
+    .nature-text,
+    h1 {
+      max-width: 350px;
+    }
+
+    /* DISPLAY NONE PÅ MOBIL-OPSÆTNING */
+
+    .img_mobile-1,
+    .img_mobile-2 {
+      display: none;
+    }
+
+    /* VIS BILLEDER I COLLAGE */
+
+    .collage-wrapper {
+      display: block;
+      position: relative;
+
+      width: 450px;
+      height: 500px;
+    }
+
+    .collage-wrapper img {
+      position: absolute;
+
+      width: 100%;
+      height: auto;
+
+      border-radius: var(--img_border);
+      object-fit: cover;
+    }
+
+    .detail-img1 {
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .detail-img2 {
+      top: 120px;
+      left: 80px;
+      z-index: 2;
+      display: block;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 2rem;
+      position: relative;
+    }
+  }
+</style>

@@ -1,0 +1,222 @@
+---
+import "../css/custom.css";
+import "../css/reset.css";
+---
+
+<footer>
+  <div class="footer-info">
+    <img
+      class="logo"
+      src="/DK_Logo_CMYK.svg"
+      alt="Dankort"
+      width="71"
+      height="42"
+    />
+    <h1 class="slogan">Når vi handler sammen</h1>
+    <div class="footer-links">
+      <h2>Dankort</h2>
+      <ul>
+        <li><a href="https://dankort.dk/dankort">Om Dankort</a></li>
+        <li><a href="https://dankort.dk/presse">Presse</a></li>
+        <li>
+          <a href="https://dankort.dk/logo-og-billeder">Download Logoer</a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h2>Support</h2>
+      <ul>
+        <li><a href="https://dankort.dk/kontakt-salg">Kontakt salg</a></li>
+        <li>
+          <a href="http://dankort.dk/kontakt-erhverv">Kontakt kundeservice</a>
+        </li>
+        <li>
+          <a href="https://dankort.dk/support-erhverv">Support erhverv</a>
+        </li>
+        <li><a href="https://dankort.dk/support-privat">Support privat</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h2>Politikker</h2>
+      <ul>
+        <li>
+          <a
+            href="https://www.nets.eu/GDPR/Pages/Privacy-notice-for-nets.aspx?__hstc=79159691.fdb6e41e4a9888069c31577db7384cf3.1777384377844.1779457862202.1779795305736.13&__hssc=79159691.1.1779795305736&__hsfp=debe404759865c493bbad0bd26bd08b7"
+            >Privatlivspolitikker</a
+          >
+        </li>
+        <li>
+          <a href="https://www.nets.eu/dk-da/Pages/cookie-policy.aspx"
+            >Cookies</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://support.nets.eu/da-DK/article/general-nexi-group-statement?__hstc=79159691.fe425ce03c33d4250e52f36263ecb825.1755247721148.1759946849211.1759991617922.41&__hssc=79159691.1.1759991617922&__hsfp=2836217097"
+            >AEE regulativ</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="billed-kredit">
+      <p>Udvalgte naturfotos: © Jesper Edvardsen / Den Danske Naturfond</p>
+    </div>
+  </div>
+
+  <div class="footer-nyhedsbrev">
+    <h1>Tilmeld dig vores nyhedsbrev</h1>
+    <input type="text" placeholder="Skriv din email her" />
+    <a class="tilmeld_btn">Tilmeld</a>
+  </div>
+</footer>
+
+<style>
+  @font-face {
+    font-family: raleway;
+    src: url(/fonts/Raleway-VariableFont_wght.ttf);
+  }
+  .logo {
+    height: auto;
+    width: 102px;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+  }
+  .slogan {
+    text-align: center;
+    font-size: 20px;
+    font-weight: var(--bold);
+    display: block;
+  }
+  .billed-kredit p {
+    font-size: var(--p-mobile);
+    color: var(--darkest-grey);
+  }
+  .footer-info h2 {
+    font-size: var(--h1-mobile);
+    font-weight: var(--semibold);
+  }
+  footer {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 24px;
+    border-radius: 25px;
+  }
+  .footer-info img {
+    margin: 1rem 0;
+  }
+  .footer-info {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    background-color: var(--lightest-grey);
+    border-radius: 25px;
+    gap: 25px;
+  }
+  .footer-links {
+    text-align: left;
+  }
+  .footer-links ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  .footer-links a {
+    font-size: var(--h2-mobile);
+    font-family: raleway;
+    text-decoration: none;
+    color: var(--black);
+  }
+  .footer-links li {
+    margin: 0 0 15px;
+  }
+  .footer-links li::before {
+    content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='5' height='9' viewBox='0 0 5 9' fill='none'><path d='M1 1L4 4.5L1 8' stroke='%23E21E27' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    margin: 0 8px 0 0;
+  }
+  .footer-nyhedsbrev {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    border-radius: 25px;
+    background-color: var(--red);
+  }
+  .footer-nyhedsbrev {
+    text-align: center;
+  }
+  .footer-nyhedsbrev h1 {
+    color: var(--white);
+    font-size: 20px;
+    white-space: normal;
+    font-weight: var(--semibold);
+  }
+
+  .footer-nyhedsbrev input {
+    text-align: left;
+    padding: 14px;
+    border-radius: 25px;
+    border: solid 1px var(--dark-grey);
+    margin: 1rem 0;
+    font-family: raleway;
+    font-size: 14px;
+    font-weight: var(--regular);
+    color: #6a6a6a;
+  }
+
+  .footer-nyhedsbrev a {
+    align-self: center;
+    font-family: raleway;
+    font-size: 16px;
+    font-weight: var(--semibold);
+    background-color: var(--black);
+    color: var(--white);
+    padding: 10px 40px;
+    border-radius: 25px;
+    width: max-content;
+    margin: 1rem 0 0 0;
+    text-decoration: none;
+    display: inline-block;
+  }
+  @media (min-width: 1024px) {
+    footer {
+      display: grid;
+      grid-template-columns: 3fr 1.1fr;
+      gap: 0;
+      width: 100%;
+      padding: 64px 80px;
+      box-sizing: border-box;
+    }
+    .slogan {
+      display: none;
+    }
+    .footer-info {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: start;
+      gap: 40px;
+    }
+    .footer-nyhedsbrev {
+      justify-content: space-between;
+      text-align: left;
+    }
+    .footer-nyhedsbrev h1 {
+      color: var(--white);
+      font-size: 24px;
+      white-space: normal;
+      padding: 1rem 0;
+    }
+    .footer-nyhedsbrev a {
+      align-self: center;
+      font-family: raleway;
+      font-size: 20px;
+      font-weight: var(--semibold);
+    }
+    .footer-nyhedsbrev input {
+      font-size: 16px;
+    }
+    .billed-kredit p {
+      font-size: 14px;
+      color: var(--darkest-grey);
+    }
+  }
+</style>

@@ -1,0 +1,123 @@
+---
+import "../css/custom.css";
+import "../css/reset.css";
+---
+
+<div class="donation">
+  <div class="headline">
+    <span class="dot"></span>
+    <h2 class="desktop">Estimeret donation til den Danske Natur</h2>
+    <h2 class="mobile">Donation indtil videre</h2>
+  </div>
+  <h3>Januar 2026 - Nu</h3>
+  <h1>2.918.994,65 KR.</h1>
+</div>
+
+<style>
+  /*   CSS - MOBILE FIRST */
+
+  .headline {
+    display: flex;
+    align-items: baseline;
+    color: var(--white);
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+
+    margin-right: 16px;
+  }
+
+  .headline h2 {
+    margin: 0;
+    color: var(--white);
+  }
+
+  .donation {
+    background: none;
+    border: none;
+
+    backdrop-filter: none;
+
+    border-radius: var(--btn_border);
+    padding: 20px;
+    max-width: 350px;
+  }
+
+  h1,
+  h3 {
+    color: var(--white);
+    text-align: right;
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: var(--bold);
+    font-family: "Raleway";
+  }
+  h2 {
+    font-size: var(--h1-mobile);
+    font-weight: var(--semibold);
+  }
+  h3 {
+    font-size: 12px;
+    font-weight: var(--bold);
+  }
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+  @media (min-width: 1024px) {
+    .desktop {
+      display: block;
+    }
+    .mobile {
+      display: none;
+    }
+    .donation {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+
+      backdrop-filter: blur(10px);
+
+      border-radius: var(--btn_border);
+      padding: 20px;
+      max-width: 350px;
+    }
+    .headline {
+      display: flex;
+      align-items: center;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: var(--bold);
+      font-family: "Raleway";
+      text-align: center;
+      margin-top: 49px;
+    }
+    h2 {
+      font-size: 24px;
+      font-weight: var(--black_weight);
+      text-align: right;
+    }
+    h3 {
+      font-size: 20px;
+      font-weight: var(--bold);
+    }
+    .dot {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      min-height: 16px;
+      display: flex;
+      flex-shrink: 0;
+      margin-bottom: 28px;
+    }
+  }
+</style>

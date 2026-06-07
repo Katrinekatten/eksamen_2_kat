@@ -1,0 +1,280 @@
+---
+import "../css/custom.css";
+import "../css/reset.css";
+
+import TreesIcon from "../assets/trees_mobil.svg";
+import ShopIcon from "../assets/shop_mobil.svg";
+import ShieldIcon from "../assets/shield_mobil.svg";
+import DkIcon from "../assets/dk_mobil.svg";
+
+type ValueItem = {
+  title: string;
+  text: string;
+  icon: { src: string };
+};
+
+const {
+  info = [
+    {
+      title: "Mere plads til Dansk Natur",
+      text: "Hver gang du betaler med dit Dankort, donerer vi til Den Danske Naturfond",
+      icon: TreesIcon,
+    },
+    {
+      title: "Støt det lokale",
+      text: "Dankort er billigere i gebyrer - Det kan mærkes i lokal butikker, også for dig",
+      icon: ShopIcon,
+    },
+    {
+      title: "Sikker bealing hver gang",
+      text: "Dine betalinger bliver i Danmark - Med høj sikkerhed",
+      icon: ShieldIcon,
+    },
+    {
+      title: "Et stærkt Dansk alternativ",
+      text: "Når vi handler sammen, står vi stærkere",
+      icon: DkIcon,
+    },
+  ] as ValueItem[],
+} = Astro.props;
+---
+
+<section class="info-banner">
+  <button
+    class="info-arrow info-arrow-left"
+    type="button"
+    aria-label="Forrige slide"
+  >
+    ‹
+  </button>
+  <div id="info-track" class="info-track">
+    {
+      info.map((item: ValueItem) => (
+        <article class="info-card">
+          <div class="info-icon-wrap">
+            <img class="info-icon" src={item.icon.src} alt="" />
+          </div>
+          <h3 class="info-title">{item.title}</h3>
+          <p class="info-text">{item.text}</p>
+        </article>
+      ))
+    }
+  </div>
+  <button
+    class="info-arrow info-arrow-right"
+    type="button"
+    aria-label="Næste slide"
+  >
+    ›
+  </button>
+
+  <div class="info-dots">
+    {
+      info.map((_: ValueItem, index: number) => (
+        <button
+          class={`info-dot ${index === 0 ? "is-active" : ""}`}
+          type="button"
+          aria-label={`Gå til slide ${index + 1}`}
+          data-dot={index}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const track = document.getElementById("info-track");
+  const dots = document.querySelectorAll<HTMLElement>("[data-dot]");
+  const prevButton = document.querySelector<HTMLElement>(".info-arrow-left");
+  const nextButton = document.querySelector<HTMLElement>(".info-arrow-right");
+
+  function getCurrentIndex() {
+    if (!track) return 0;
+    return Math.round(track.scrollLeft / track.clientWidth);
+  }
+
+  function updateDots() {
+    const index = getCurrentIndex();
+    dots.forEach((dot, i) => dot.classList.toggle("is-active", i === index));
+  }
+
+  function goToSlide(index: number) {
+    if (!track) return;
+
+    const maxIndex = dots.length - 1;
+    const nextIndex = Math.max(0, Math.min(index, maxIndex));
+
+    track.scrollTo({
+      left: track.clientWidth * nextIndex,
+      behavior: "smooth",
+    });
+  }
+
+  function goToPreviousSlide() {
+    goToSlide(getCurrentIndex() - 1);
+  }
+
+  function goToNextSlide() {
+    goToSlide(getCurrentIndex() + 1);
+  }
+
+  dots.forEach((dot, index) =>
+    dot.addEventListener("click", () => goToSlide(index)),
+  );
+
+  prevButton?.addEventListener("click", goToPreviousSlide);
+  nextButton?.addEventListener("click", goToNextSlide);
+
+  track?.addEventListener("scroll", updateDots, { passive: true });
+  window.addEventListener("resize", updateDots);
+
+  updateDots();
+</script>
+
+<style>
+  @font-face {
+    font-family: raleway;
+    src: url(/fonts/Raleway-VariableFont_wght.ttf);
+  }
+  .info-banner {
+    position: relative;
+    overflow: hidden;
+  }
+  .info-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    transform: translateY(-50%);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    color: var(--black);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .info-arrow-left {
+    left: 0.75rem;
+  }
+
+  .info-arrow-right {
+    right: 0.75rem;
+  }
+
+  .info-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .info-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .info-card {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    text-align: center;
+    padding: 2.5rem 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  .info-icon-wrap {
+    margin-bottom: 1rem;
+  }
+
+  .info-icon {
+    height: 3rem;
+    object-fit: contain;
+    padding-bottom: 1rem;
+  }
+
+  .info-title,
+  .info-text {
+    margin: 0;
+    color: var(--black);
+    font-family: raleway;
+  }
+
+  .info-title {
+    font-size: var(--h1-mobile);
+    font-weight: var(--title-weight);
+    margin-bottom: 0.5rem;
+  }
+
+  .info-text {
+    font-size: var(--p-mobile);
+    flex-grow: 1;
+  }
+
+  .info-dots {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0 0 2rem;
+  }
+
+  .info-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    border: 1px solid var(--dark-grey);
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .info-dot.is-active {
+    background: var(--darkest-grey);
+  }
+
+  @media (min-width: 800px) {
+    .info-arrow {
+      display: none;
+    }
+    .info-banner {
+      padding: 4rem 2rem;
+    }
+
+    .info-track {
+      overflow: visible;
+      scroll-snap-type: unset;
+    }
+
+    .info-card {
+      flex: 1 1 25%;
+      padding: 0 2rem;
+      position: relative;
+      height: max-content;
+    }
+
+    .info-card:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      inset: 0 0 0 auto;
+      width: 1px;
+      height: 240px;
+      background: var(--darkest-grey);
+      opacity: 0.2;
+    }
+
+    .info-title {
+      font-size: var(--icons-h-desktop);
+    }
+    .info-text {
+      font-size: var(--icons-p-desktop);
+    }
+
+    .info-dots {
+      display: none;
+    }
+  }
+</style>
