@@ -27,10 +27,17 @@ export async function getStaticPaths() {
     import.meta.env.PUBLIC_SUPABASE_URL,
     import.meta.env.PUBLIC_SUPABASE_KEY,
   );
-  const { data } = await supabase.from("naturomraader").select("slug");
-  return data.map((sted) => ({
-    params: { slug: sted.slug },
-  }));
+  const { data, error } = await supabase
+  .from("naturomraader")
+  .select("slug");
+
+if (error || !data) {
+  return [];
+}
+
+return data.map((sted) => ({
+  params: { slug: sted.slug },
+}));
 }
 ---
 
@@ -82,6 +89,8 @@ export async function getStaticPaths() {
     font-size: var(--h1-mobile);
     font-weight: var(--bold);
     margin-bottom: 1rem;
+    white-space: nowrap;
+    text-align: center;
   }
 
   h2 {
@@ -103,8 +112,10 @@ export async function getStaticPaths() {
   .img_mobile-1,
   .img_mobile-2 {
     display: block;
-    margin: 0 auto;
-    min-width: 100%;
+    
+     border-radius: var(--img_border);
+      width: calc(100% - 24px);
+  margin: 12px;
   }
 
   @media (min-width: 1024px) {
@@ -115,6 +126,7 @@ export async function getStaticPaths() {
     h1 {
       font-size: var(--h1);
       margin: 0 auto;;
+      text-align: center;
     }
 
     h2 {
