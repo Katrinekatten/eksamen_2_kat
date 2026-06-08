@@ -46,7 +46,7 @@ console.log("Error:", error);
        <!-- HERO BILLEDE OG TEKST, DESKTOP-->
 
     <div class="nature-text-mobile">
-      <h1>Vi giver plads til den Danske Natur - MOBIL VISNING</h1>
+      <h1>Vi giver plads til den Danske Natur</h1>
       <p>
         Hver gang du bruger dit Dankort, donerer vi 1 øre til Den Danske
         Naturfond. Det bliver til mere end 10 millioner kroner hvert år, der går
@@ -93,7 +93,8 @@ console.log("Error:", error);
 
         <!-- STANDARD CARD (vises først) -->
         <div class="card-default" id="card-default">
-          <p>Klik på de røde prikker for at læse om de områder som Dankort donerer til</p>
+          <h2 class="h2_card">Klik på de røde prikker</h2>
+          <p class="p_card">Se hvilke områder Danskerne har været med til at støtte gennem Dankort.</p>
         </div>
 
         <!-- DYNAMISK CARD (skifter når man klikker en pin) -->
@@ -182,7 +183,18 @@ console.log("Error:", error);
     color: var(--red);
     padding: 0 1rem;
   }
-
+ .h2_card{
+   font-size: 14px;
+   font-weight: var(--semibold);
+   color: var(--black);
+   text-align: left;
+   padding: 0;
+ }
+ .p_card{
+   font-size:12px ;
+   font-weight:var(--regular) ;
+   text-align: left;
+ }
   p {
     font-size: var(--p-mobile);
     font-weight: var(--regular);
@@ -233,7 +245,7 @@ console.log("Error:", error);
 
   /* CARD */
   .map-card {
-    background-color: white;
+    background-color:var(--yellow);
     border-radius: 16px;
     padding: 1rem;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
@@ -242,11 +254,10 @@ console.log("Error:", error);
 
   .card-default {
     display: flex;
-    align-items: center;
-    justify-content: center;
+   flex-direction: column;
     min-height: 200px;
-    text-align: center;
     padding: 1rem;
+    text-align: left;
   }
 
   .card-detail {
@@ -328,7 +339,14 @@ console.log("Error:", error);
       font-size: var(--h2);
       margin-bottom: 1.5rem;
     }
-
+  .h2_card{
+    font-size:40px;
+    text-align: left;
+  }
+  .p_card{
+    font-size:20px;
+    text-align: left;
+  }
   p {
       font-size: var(--p);
     }
