@@ -22,25 +22,25 @@ Projektet er udviklet med Astro, HTML, CSS og JavaScript, hvor udvalgt indhold h
 # Links
 
 - Live site:  
-[Indsæt Netlify link]
+  [Indsæt Netlify link]
 
 - GitHub Repository:  
-https://github.com/DankortOeremaerket-EksamensProjekt/OeremaerketEksamen
+  https://github.com/DankortOeremaerket-EksamensProjekt/OeremaerketEksamen
 
 - Figma:  
-https://www.figma.com/design/iO7EkZnKBT3wp1p5xXSx4s/Tema-10--eksamen?node-id=0-1&p=f&t=lUUtlDHGzCWh8DFS-0
+  https://www.figma.com/design/iO7EkZnKBT3wp1p5xXSx4s/Tema-10--eksamen?node-id=0-1&p=f&t=lUUtlDHGzCWh8DFS-0
 
 - Trello Board:  
-https://trello.com/b/B6ZEmDdB/eksamen
+  https://trello.com/b/B6ZEmDdB/eksamen
 
 ---
 
 # Gruppemedlemmer
 
 - Ida Dam – idda0001@stud.ek.dk
-- Katrine Madsen - kama0011@stud.ek.dk 
-- Julie Stigsen - just0003@stud.ek.ek  
-- Patricia Klindt Brokholm - patr1541@stud.ek.dk 
+- Katrine Madsen - kama0011@stud.ek.dk
+- Julie Stigsen - just0003@stud.ek.ek
+- Patricia Klindt Brokholm - patr1541@stud.ek.dk
 
 ---
 
@@ -65,7 +65,7 @@ Projektet er udviklet med:
 OEREMAERKETEKSAMEN/
 ├── public/
 │   ├── fonts/
-│   │   └── Raleway-VariableFont_wght.ttf
+│   │   └── Raleway-VariableFont_wght.woff2
 │   ├── video/
 │   │   └── hero_index.mp4
 │   ├── favicon.svg
@@ -194,11 +194,11 @@ const stepsSection = document.getElementById("steps");
 
 ```javascript
 if (burger && menu) {
-    burger.addEventListener("click", () => {
-      burger.classList.toggle("active");
-      menu.classList.toggle("active");
-    });
-  }
+  burger.addEventListener("click", () => {
+    burger.classList.toggle("active");
+    menu.classList.toggle("active");
+  });
+}
 ```
 
 Vi har benyttet camelCase i JavaScript for at skabe ensartethed og bedre læsbarhed i koden.
@@ -229,15 +229,15 @@ Projektet henter dynamisk indhold fra Supabase i JSON-format.
 ## Felter vi bruger
 
 ```javascript
-navn        // Navn på naturområdet — vises som overskrift
-undertitel  // Kort undertitel — vises på card og detaljeside
-beskrivelse // Længere beskrivelse af naturområdet
-billede_url  // URL til primært billede
-billede_url_2 // URL til sekundært billede
-billede_url_3 // URL til tertiært billede
-pin_x       // Kortets X-koordinat i procent (bruges til placering af pin på Danmarkskortet)
-pin_y       // Kortets Y-koordinat i procent (bruges til placering af pin på Danmarkskortet)
-slug        // URL-venligt navn til dynamisk routing fx /productlist/storebaelt_klint
+navn; // Navn på naturområdet — vises som overskrift
+undertitel; // Kort undertitel — vises på card og detaljeside
+beskrivelse; // Længere beskrivelse af naturområdet
+billede_url; // URL til primært billede
+billede_url_2; // URL til sekundært billede
+billede_url_3; // URL til tertiært billede
+pin_x; // Kortets X-koordinat i procent (bruges til placering af pin på Danmarkskortet)
+pin_y; // Kortets Y-koordinat i procent (bruges til placering af pin på Danmarkskortet)
+slug; // URL-venligt navn til dynamisk routing fx /productlist/storebaelt_klint
 ```
 
 ---
@@ -305,6 +305,7 @@ Generativ AI er blevet anvendt som støtteværktøj til blandt andet:
 Brugen af AI er dokumenteret i overensstemmelse med eksamenskravene.
 
 ---
+
 ---
 
 # Mulige forbedringer
