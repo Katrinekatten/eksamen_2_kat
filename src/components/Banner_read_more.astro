@@ -1,6 +1,7 @@
 ---
 import "../css/custom.css";
 import "../css/reset.css";
+import frø from "../img/loevfro_naturfond.webp";
 ---
 
 <div class="banner_readmore">
@@ -15,7 +16,7 @@ import "../css/reset.css";
     <a href="https://naturfonden.dk/dankort/">Tag mig til Naturfonden</a>
   </div>
 
-  <img src="/src/img/loevfro_naturfond.webp" alt="Grøn frø" />
+  <img src={frø.src} alt="Grøn frø" />
 </div>
 
 <style>
@@ -114,8 +115,8 @@ import "../css/reset.css";
     }
 
     img {
-      height: 280px;
-      width: auto;
+      height:auto;
+      width: 548px;
       min-width: 300px;
 
       object-fit: cover;

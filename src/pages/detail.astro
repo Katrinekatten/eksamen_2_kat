@@ -6,6 +6,12 @@ import "../css/custom.css";
 import "../css/reset.css";
 import kort from "../assets/kort.svg";
 
+// IMAGES
+import sandstrand from "../img/sandy_beach.webp";
+import sandstrand_kyst from "../img/sandy_beach_coastline.webp";
+import strand_graes from "../img/grassy_beach_sunset.webp";
+
+
 const { data: naturomraader, error } = await supabase
   .from("naturomraader")
   .select("*");
@@ -21,9 +27,9 @@ console.log("Error:", error);
 <section class="hero-box">
 
     <div class="hero-photos">
-      <img src="/src/img/sandy_beach.webp" alt="Sandstrand" class="hero-img layer layer1" />
-      <img src="/src/img/sandy_beach_coastline.webp" alt="Sandstrand med kyst" class="hero-desktop layer layer2" />
-      <img src="/src/img/grassy_beach_sunset.webp" alt="Sandstrand med solnedgang" class="hero-desktop layer layer3" />
+      <img src={sandstrand.src} alt="Sandstrand" class="hero-img layer layer1" />
+      <img src={sandstrand_kyst.src} alt="Sandstrand med kyst" class="hero-desktop layer layer2" />
+      <img src={strand_graes.src} alt="Sandstrand med solnedgang" class="hero-desktop layer layer3" />
     </div>
 
  <div class="nature-text-desktop">
