@@ -100,7 +100,7 @@ import Udfyld from "../img/udfyld_detaljer.svg";
   .step_2_1 {
     display: grid;
     grid-template-columns: 1fr 120px;
-    align-items: center;
+    
     gap: 0.5rem;
     padding-top: 1rem;
   }
@@ -111,8 +111,8 @@ import Udfyld from "../img/udfyld_detaljer.svg";
     display: none;
   }
   #mobil_billed {
-    height: 15rem;
-    width: auto;
+    height: 186px;
+    width:auto;
     position: relative;
     overflow: hidden;
   }
@@ -132,7 +132,6 @@ import Udfyld from "../img/udfyld_detaljer.svg";
   }
   .step_billeder {
     position: relative;
-    width: 120px;
     height: auto;
     overflow: hidden;
   }
@@ -141,7 +140,8 @@ import Udfyld from "../img/udfyld_detaljer.svg";
     filter: grayscale(30%);
   }
   .jump_down_button {
-    width: 2rem;
+    width:25px;
+    height:25px;
     margin-top: 1.5rem;
   }
 
@@ -209,19 +209,23 @@ import Udfyld from "../img/udfyld_detaljer.svg";
 
   @media (min-width: 1024px) {
     .step_2_1 {
-      max-width: 1200px;
+      
       padding: 5rem 0;
       display: grid;
       grid-template-columns: 1fr 1fr;
       margin: 0 auto;
+      margin-left: 54px;
     }
 
     #desktop_billed {
       display: block;
-      height: 20rem;
+      height:435px;
+      width: auto;
     }
     #mobil_billed {
-      height: 20rem;
+      height:435px;
+      width: auto;
+      flex-shrink: 0;
     }
     .step_billeder {
       display: flex;
@@ -273,7 +277,8 @@ import Udfyld from "../img/udfyld_detaljer.svg";
     }
 
     .jump_down_button {
-      width: 3rem;
+      width:50px;
+      height: 50px;
     }
     .mobil_sti {
       height: 75rem;
