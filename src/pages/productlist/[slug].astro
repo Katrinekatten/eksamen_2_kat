@@ -41,7 +41,8 @@ return data.map((sted) => ({
 }
 ---
 
-<Layout>
+<Layout  title={sted.navn}
+  description={sted.navn}>
   <main>
     <!-- MOBIL BILLEDE 1 -->
     <img src={sted.billede_url} alt={sted.navn} class="img_mobile-1" />
